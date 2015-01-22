@@ -1,0 +1,26 @@
+{
+    "name": "quiborgue/laravel-deploy",
+    "description": "Usefull deployment tools for Laravel",
+    "authors": [
+        {
+            "name": "Quiborgue",
+            "email": "dev@quiborgue.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Quiborgue\\LaravelDeploy": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://bitbucket.org/quiborgue/laravel-deploy"
+        }
+    ]
+}
