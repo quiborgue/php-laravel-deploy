@@ -13,6 +13,10 @@ class LaravelDeployServiceProvider extends ServiceProvider {
 	 */
 	protected $defer = false;
 
+	public function boot() {
+		 $this->package('quiborgue/laravel-deploy');
+	}
+
 	/**
 	 * Register the service provider.
 	 *

@@ -39,14 +39,24 @@ class DeployCommand extends Command {
 	 */
 	public function fire()
 	{
-		$appName = 'garra-parser';
+		$packageName = 'quiborgue/laravel-deploy';
+		$appName = Config::get("$packageName::deploy.application-name");
+		$basePath = Config::get("$packageName::deploy.base-path");
+		$branch = Config::get("$packageName::deploy.branch");
+		$gitUrl = Config::get("$packageName::deploy.git");
+		$ownership = Config::get("$packageName::deploy.ownership");
+
+		if (!$appName) {
+			throw new Exception("Please configure application-name inside deploy.php configuration.");
+		}
+
+		if (!$gitUrl) {
+			throw new Exception("Please configure git inside deploy.php configuration.");
+		}
+		
 		$release = Carbon::now()->getTimestamp();
-		$basePath = '/var/www';
 		$appPath = "$basePath/$appName";
-		$branch = 'featured';
-		$gitUrl = 'git@bitbucket.org:quiborgue/garra-parser.git';
 		$releasePath = "$appPath/releases/$release";
-		$ownership = "www-data:www-data";
 
 		$writables = array();
 
@@ -58,7 +68,6 @@ class DeployCommand extends Command {
 
 		$commandList = array();
 		$commandList[] = "export LARAVEL_ENV=production";
-		$commandList[] = "env";
 		$commandList[] = "mkdir -p $releasePath";
 		$commandList[] = "git clone --depth 1 -b $branch \"$gitUrl\" $releasePath";
 
