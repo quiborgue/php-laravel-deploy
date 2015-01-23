@@ -23,7 +23,7 @@ That's it! You're all set to go. Run the `artisan` command from the Terminal to 
 
 ## Server initial setup
 	# Login to your server
-	local $ ssh root@remote
+	local # ssh root@remote
 
 	# Update system
 	remote# apt-get update
@@ -66,6 +66,5 @@ That's it! You're all set to go. Run the `artisan` command from the Terminal to 
 
 	# Exit and teste your deploy
 	remote# exit
-	local $ cd /laravel/project/path
-	local $ php artisan deploy
-	
+	local # cd /laravel/project/path
+	local # php artisan deploy
