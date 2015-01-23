@@ -39,19 +39,22 @@ class DeployCommand extends Command {
 	 */
 	public function fire()
 	{
-		$packageName = 'quiborgue/laravel-deploy';
-		$appName = Config::get("$packageName::deploy.application-name");
-		$basePath = Config::get("$packageName::deploy.base-path");
-		$branch = Config::get("$packageName::deploy.branch");
-		$gitUrl = Config::get("$packageName::deploy.git");
-		$ownership = Config::get("$packageName::deploy.ownership");
+		$packageName = 'laravel-deploy';
+		$basePath = \Config::get("$packageName::base-path");
+		$appName = \Config::get("$packageName::application-name");
+		$basePath = \Config::get("$packageName::base-path");
+		$branch = \Config::get("$packageName::branch");
+		$gitUrl = \Config::get("$packageName::git");
+		$ownership = \Config::get("$packageName::ownership");
 
 		if (!$appName) {
-			throw new Exception("Please configure application-name inside deploy.php configuration.");
+			$this->error("Please configure application-name inside configuration file. Use `php artisan config:publish $packageName` to create it.");
+			return;
 		}
 
 		if (!$gitUrl) {
-			throw new Exception("Please configure git inside deploy.php configuration.");
+			$this->error("Please configure git inside configuration file. Use `php artisan config:publish $packageName` to create it.");
+			return;
 		}
 		
 		$release = Carbon::now()->getTimestamp();
@@ -98,7 +101,7 @@ class DeployCommand extends Command {
 		foreach ($commandList as $command) {
 			$this->info($command);
 		}
-		SSH::run($commandList);
+		\SSH::run($commandList);
 	}
 
 	/**

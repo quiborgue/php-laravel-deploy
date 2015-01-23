@@ -1,59 +1,21 @@
-## Laravel Behat Traits
+## Laravel Deploy
 
 ### Usage:
 
-#### Add to composer.json
-```
-"require-dev": {
-    "behat/behat": "3.0.*",
-    "quiborgue/utils": "dev-master",
-    "quiborgue/laravel-behat-traits": "dev-master"
-},
-```
+Begin by installing this package through Composer. Edit your project's `composer.json` file to require `way/generators`.
 
-#### Edit your FeatureContext
-```
-<?php
-require_once __DIR__.'/../../bootstrap/autoload.php';
-
-use Behat\Behat\Context\Context;
-use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
-
-use Quiborgue\LaravelBehatTraits\Traits\LaravelSetup;
-use Quiborgue\LaravelBehatTraits\Traits\RestContext;
-use Quiborgue\LaravelBehatTraits\Traits\WebContext;
-
-/**
- * Defines application features from the specific context.
- */
-class FeatureContext implements Context, SnippetAcceptingContext
-{
-    use LaravelSetup;
-    use RestContext;
-    use WebContext;
-    /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
-     */
-    public function __construct()
-    {
+    "require-dev": {
+        "quiborgue/laravel-deploy": "dev-master"
     }
-}
-```
 
-#### Available steps
-```
-RestContext |  When /^(?:I )?send a ([A-Z]+) request to "([^"]+)"$/
-RestContext |  When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with parameters:$/
-RestContext |  Then the response status should be :code
-RestContext |  Then the JSON response should be:
-RestContext |  Then the JSON response should be an array with :count elements
-WebContext  | Given I am logged in
-WebContext  |  When I visit :uri
-WebContext  |  Then I should see :text
-```
+Next, update Composer from the Terminal:
+
+    composer update --dev
+
+Once this operation completes, the final step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
+
+    'Quiborgue\LaravelDeploy\LaravelDeployServiceProvider'
+
+That's it! You're all set to go. Run the `artisan` command from the Terminal to see the new `generate` commands.
+
+    php artisan

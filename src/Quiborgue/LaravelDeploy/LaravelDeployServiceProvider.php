@@ -24,7 +24,15 @@ class LaravelDeployServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		Artisan::add(new DeployCommand);
+		$this->registerDeploy();
+	}
+
+	private function registerDeploy() {
+		$this->app['deploy.deploy'] = $this->app->share(function($app)
+        {
+            return new DeployCommand;
+        });
+        $this->commands('deploy.deploy');
 	}
 
 	/**
