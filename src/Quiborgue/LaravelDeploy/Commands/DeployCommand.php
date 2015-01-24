@@ -87,7 +87,7 @@ class DeployCommand extends Command {
 			} else {
 				$sharedDirPath = dirname($sharedPath);
 				$commandList[] = "mkdir -p $sharedDirPath";
-				$commandList[] = "touch $sharedPath";
+				// $commandList[] = "touch $sharedPath";
 			}
 			
 			
