@@ -3,6 +3,7 @@ namespace Quiborgue\LaravelDeploy;
 
 use Illuminate\Support\ServiceProvider;
 use Quiborgue\LaravelDeploy\Commands\DeployCommand;
+use Quiborgue\LaravelDeploy\Commands\RemoteRunCommand;
 
 class LaravelDeployServiceProvider extends ServiceProvider {
 
@@ -25,6 +26,7 @@ class LaravelDeployServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->registerDeploy();
+		$this->registerRemoteRun();
 	}
 
 	private function registerDeploy() {
@@ -33,6 +35,14 @@ class LaravelDeployServiceProvider extends ServiceProvider {
             return new DeployCommand;
         });
         $this->commands('deploy.deploy');
+	}
+
+	private function registerRemoteRun() {
+		$this->app['deploy.run'] = $this->app->share(function($app)
+        {
+            return new RemoteRunCommand;
+        });
+        $this->commands('deploy.run');
 	}
 
 	/**

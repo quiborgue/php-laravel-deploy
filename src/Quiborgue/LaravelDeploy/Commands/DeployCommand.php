@@ -5,6 +5,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class DeployCommand extends Command {
 
@@ -64,8 +65,8 @@ class DeployCommand extends Command {
 		$writables = array();
 
 		$shareds = array(
-			'app/storage/sessions',
-			'app/storage/logs',
+			'app/storage/sessions/',
+			'app/storage/logs/',
 			'app/database/production.sqlite'
 		);
 
@@ -78,8 +79,20 @@ class DeployCommand extends Command {
 		$commandList[] = "composer install --no-interaction --no-dev --prefer-dist";
 
 		foreach ($shareds as $shared) {
+			$sharedPath = "$appPath/shared/$shared";
+			if (Str::endsWith($shared, "/")) {
+				$sharedPath = rtrim($sharedPath, "/");
+				$shared = rtrim($shared, "/");
+				$commandList[] = "mkdir -p $sharedPath";
+			} else {
+				$sharedDirPath = dirname($sharedPath);
+				$commandList[] = "mkdir -p $sharedDirPath";
+				$commandList[] = "touch $sharedPath";
+			}
+			
+			
 			$commandList[] = "rm -rf $releasePath/$shared";
-			$commandList[] = "ln -s $appPath/shared/$shared $releasePath/$shared";
+			$commandList[] = "ln -s $sharedPath $releasePath/$shared";
 		}
 
 		foreach ($writables as $writable) {
