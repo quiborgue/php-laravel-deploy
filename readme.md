@@ -64,6 +64,18 @@ That's it! You're all set to go. Run the `artisan` command from the Terminal to 
 	remote#	chown deploy.www-data /var/www
 	remote#	chmod g+s /var/www
 
+	# Configure Composer dependencies
+	remote#	su deploy
+	remote#	composer global require "fxp/composer-asset-plugin:dev-master"
+        remote#   exit
+
+        # Configure swap memory
+        remote#  fallocate -l 4G /swapfile
+        remote#  chmod 600 /swapfile
+        remote#  mkswap /swapfile
+        remote#  echo "/swapfile   none    swap    sw    0   0" >> /etc/fstab
+        remote#  shutdown -r now
+
 	# Exit and teste your deploy
 	remote# exit
 	local # cd /laravel/project/path
