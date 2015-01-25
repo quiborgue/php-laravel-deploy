@@ -49,12 +49,12 @@ class DeployCommand extends Command {
 		$ownership = \Config::get("$packageName::ownership");
 
 		if (!$appName) {
-			$this->error("Please configure application-name inside configuration file. Use `php artisan config:publish $packageName` to create it.");
+			$this->error("Please configure application-name inside configuration file. Use `php artisan config:publish quiborgue/$packageName` to create it.");
 			return;
 		}
 
 		if (!$gitUrl) {
-			$this->error("Please configure git inside configuration file. Use `php artisan config:publish $packageName` to create it.");
+			$this->error("Please configure git inside configuration file. Use `php artisan config:publish quiborgue/$packageName` to create it.");
 			return;
 		}
 		
