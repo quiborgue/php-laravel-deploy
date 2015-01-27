@@ -40,7 +40,17 @@ class RemoteRunCommand extends Command {
 	 */
 	public function fire()
 	{
-		\SSH::run($this->argument('remoteCommand'));
+		$packageName = 'laravel-deploy';
+		$appName = \Config::get("$packageName::application-name");
+		$basePath = \Config::get("$packageName::base-path");
+		$appPath = "$basePath/$appName/current";
+		echo "Running: " . 'LARAVEL_ENV=production ' . $this->argument('remoteCommand') ." inside $appPath\n";
+		\SSH::run(array(
+			"cd $appPath",
+			"pwd",
+			"LARAVEL_ENV=production " . $this->argument('remoteCommand')
+			)
+		);
 	}
 
 	/**
