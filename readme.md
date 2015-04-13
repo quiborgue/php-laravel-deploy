@@ -2,7 +2,7 @@
 
 ### Usage:
 
-Begin by installing this package through Composer. Edit your project's `composer.json` file to require `way/generators`.
+Begin by installing this package through Composer. Edit your project's `composer.json` file to require `quiborgue/laravel-deploy`.
 
     "require-dev": {
         "quiborgue/laravel-deploy": "dev-master"
