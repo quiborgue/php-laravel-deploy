@@ -47,6 +47,7 @@ class DeployCommand extends Command {
 		$branch = \Config::get("$packageName::branch");
 		$gitUrl = \Config::get("$packageName::git");
 		$ownership = \Config::get("$packageName::ownership");
+		$remoteEnv = \Config::get("$packageName::remote-env", "production");
 
 		if (!$appName) {
 			$this->error("Please configure application-name inside configuration file. Use `php artisan config:publish quiborgue/$packageName` to create it.");
@@ -71,7 +72,7 @@ class DeployCommand extends Command {
 		);
 
 		$commandList = array();
-		$commandList[] = "export LARAVEL_ENV=production";
+		$commandList[] = "export LARAVEL_ENV=$remoteEnv";
 		$commandList[] = "mkdir -p $releasePath";
 		$commandList[] = "git clone --depth 1 -b $branch \"$gitUrl\" $releasePath";
 

@@ -4,5 +4,6 @@ return array(
     'base-path' => '/var/www',
     'branch' => 'master',
     'git' => null,
-    'ownership' => 'www-data:www-data'
+    'ownership' => 'www-data:www-data',
+    'remote-env' => 'production'
 );
