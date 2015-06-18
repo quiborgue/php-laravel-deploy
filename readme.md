@@ -24,6 +24,9 @@ That's it! You're all set to go. Run the `artisan` command from the Terminal to 
 ## Server initial setup
 	# Login to your server
 	local # ssh root@remote
+        remote# sudo locale-gen pt_BR.UTF-8
+        remote# sudo dpkg-reconfigure locales
+
 
 	# Update system
 	remote# apt-get update
