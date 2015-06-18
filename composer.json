@@ -1,6 +1,7 @@
 {
     "name": "quiborgue/laravel-deploy",
     "description": "Usefull deployment tools for Laravel",
+    "license": "MIT",
     "authors": [
         {
             "name": "Quiborgue",
