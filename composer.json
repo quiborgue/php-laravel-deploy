@@ -18,11 +18,5 @@
             "Quiborgue\\LaravelDeploy": "src/"
         }
     },
-    "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://bitbucket.org/quiborgue/laravel-deploy"
-        }
-    ]
+    "minimum-stability": "stable"
 }
