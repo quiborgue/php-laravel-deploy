@@ -50,6 +50,7 @@ That's it! You're all set to go. Run the `artisan` command from the Terminal to 
 	remote# apt-get install git
 	remote# curl -sS https://getcomposer.org/installer | php
 	remote# mv composer.phar /usr/bin/composer
+	remote# php5enmod mcrypt
 	
 	
 	
