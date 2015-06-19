@@ -45,7 +45,13 @@ That's it! You're all set to go. Run the `artisan` command from the Terminal to 
 	remote#	apt-get install libapache2-mod-php5
 	remote#	apt-get install php5-mcrypt php5-curl
 	remote#	apt-get install [php5-sqlite|php5-pgsql postgresql|php-mysql mysql-server]
+	
+	# Install deployment packages
 	remote# apt-get install git
+	remote# curl -sS https://getcomposer.org/installer | php
+	remote# mv composer.phar /usr/bin/composer
+	
+	
 	
 	# Create deployment user
 	remote#	useradd deploy
